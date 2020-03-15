@@ -41,14 +41,19 @@ const controlSearch = async () => {
         searchView.clearInput();
         searchView.clearResults();
         renderLoader(elements.searchRes);
+        try {
+            //4. Search for recipes
+            await state.search.getResults();
 
-        //4. Search for recipes
-        await state.search.getResults();
-
-        //5. Render results on UI
-        clearLoader();
-        searchView.renderResults(state.search.result);
-        // console.log(state.search.result);
+            //5. Render results on UI
+            clearLoader();
+            searchView.renderResults(state.search.result);
+            // console.log(state.search.result);
+        } catch (error) {
+            alert('Error with your search request');
+            clearLoader();
+        }
+        
     }
 }
 
@@ -91,16 +96,27 @@ const controlRecipe = async () => {
         //Create new recipe object
         state.recipe = new Recipe(id);
 
-        //Get the recipe data
-        await state.recipe.getRecipe();
+        try {
+            //Get the recipe data
+            await state.recipe.getRecipe();
 
-        //Calculate servings and cooking time
-        state.recipe.calcTime();
-        state.recipe.calcServings();
+            //Calculate servings and cooking time
+            state.recipe.calcTime();
+            state.recipe.calcServings();
 
-        //Render the recipe
-        console.log(state.recipe);
+            //Render the recipe
+            console.log(state.recipe);
+        } catch(error) {
+            alert('Error processing recipe :(');
+        }
+
+        
     }
 }
 
-window.addEventListener('hashchange', controlRecipe);
+// window.addEventListener('hashchange', controlRecipe);
+// window.addEventListener('load', controlRecipe);
+
+//The 2 lines of code above can be simplified in one single line as follows
+
+['hashchange','load'].forEach(event => window.addEventListener(event, controlRecipe));
