@@ -1,7 +1,9 @@
 // Global app controller
 import Search from './models/Search';
-import {elements} from './views/base';
+import {elements, renderLoader, clearLoader, searchResPages} from './views/base';
 import * as searchView from './views/searchView';
+import Recipe from './models/Recipe';
+
 /*
 import string from './models/Search';
 // import { add, multiply, ID } from './views/searchView'; ---First way of doing it
@@ -23,21 +25,30 @@ console.log(`Using imported functions! ${searchView.add(searchView.ID, 2)} and $
 //Initial state is empty
 const state = {};
 
+/***********************/
+/**SEARCH CONTROLLER ***/
+/***********************/
+
 const controlSearch = async () => {
     //1. Get the query from View
     const query = searchView.getInput();
-    console.log(query);
+    // console.log(query);
     if (query) {
         //2. New search object and add to state
-
         state.search = new Search(query);
+
         //3. Prepare UI for results
+        searchView.clearInput();
+        searchView.clearResults();
+        renderLoader(elements.searchRes);
 
         //4. Search for recipes
         await state.search.getResults();
 
         //5. Render results on UI
-        console.log(state.search.result);
+        clearLoader();
+        searchView.renderResults(state.search.result);
+        // console.log(state.search.result);
     }
 }
 
@@ -50,3 +61,46 @@ elements.searchForm.addEventListener('submit', event => {
 // const search = new Search('pizza');
 // console.log(search);
 
+elements.searchResPages.addEventListener('click', event => {
+    const btn = event.target.closest('.btn-inline');
+    if (btn) {
+        const goToPage = parseInt(btn.dataset.goto, 10);
+        searchView.clearResults();
+        searchView.renderResults(state.search.result, goToPage);
+        // console.log(goToPage);
+    }
+    
+});
+
+/***********************/
+/**RECIPE CONTROLLER ***/
+/***********************/
+
+//Just for testing
+// const rec = new Recipe(35477);
+// rec.getRecipe();
+// console.log(rec);
+
+const controlRecipe = async () => {
+    //Get the id from the url and remove the hash simbol from it
+    const id = window.location.hash.replace('#', '');
+    console.log(id);
+    if (id) {
+        //Prepare UI for changes
+
+        //Create new recipe object
+        state.recipe = new Recipe(id);
+
+        //Get the recipe data
+        await state.recipe.getRecipe();
+
+        //Calculate servings and cooking time
+        state.recipe.calcTime();
+        state.recipe.calcServings();
+
+        //Render the recipe
+        console.log(state.recipe);
+    }
+}
+
+window.addEventListener('hashchange', controlRecipe);

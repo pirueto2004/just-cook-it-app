@@ -76,7 +76,7 @@
       fill: currentColor; }
   
   .btn-inline {
-    color: #F59A83;
+    color: #bf00ff;
     font-size: 1.2rem;
     border: none;
     background-color: #F9F5F3;
@@ -145,7 +145,7 @@
     .loader svg {
       height: 5.5rem;
       width: 5.5rem;
-      fill: #F59A83;
+      fill: #bf00ff;
       transform-origin: 44% 50%;
       animation: rotate 1.5s infinite linear; }
   
@@ -248,7 +248,7 @@
     .results__fig,
     .likes__fig {
       flex: 0 0 5.5rem;
-      border-radius: 50%;
+      border-radius: 20%;
       overflow: hidden;
       height: 5.5rem;
       margin-right: 2rem;
@@ -263,7 +263,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        background-image: linear-gradient(to right bottom, #FBDB89, #F48982);
+        background-image: linear-gradient(to right bottom, #FBDB89, #bf00ff);
         opacity: .4; }
       .results__fig img,
       .likes__fig img {
@@ -275,7 +275,7 @@
     .results__name,
     .likes__name {
       font-size: 1.3rem;
-      color: #F59A83;
+      color: #bf00ff;
       text-transform: uppercase;
       font-weight: 600;
       margin-bottom: .3rem; }
@@ -318,7 +318,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        background-image: linear-gradient(to right bottom, #FBDB89, #F48982);
+        background-image: linear-gradient(to right bottom, #FBDB89, #bf00ff);
         opacity: .6; }
     .recipe__img {
       width: 100%;
@@ -341,7 +341,7 @@
         -webkit-box-decoration-break: clone;
         box-decoration-break: clone;
         padding: 1.3rem 2rem;
-        background-image: linear-gradient(to right bottom, #FBDB89, #F48982); }
+        background-image: linear-gradient(to right bottom, #FBDB89, #bf00ff); }
     .recipe__details {
       display: flex;
       align-items: center;
@@ -356,7 +356,7 @@
     .recipe__info-icon {
       height: 2rem;
       width: 2rem;
-      fill: #F59A83;
+      fill: #bf00ff;
       margin-right: 1rem; }
     .recipe__info-data {
       margin-right: .4rem;
@@ -373,7 +373,7 @@
       opacity: 1;
       transform: translateY(0); }
     .recipe__love {
-      background-image: linear-gradient(to right bottom, #FBDB89, #F48982);
+      background-image: linear-gradient(to right bottom, rgb(252, 229, 249), #bf00ff);
       border-radius: 50%;
       border: none;
       cursor: pointer;
@@ -412,8 +412,8 @@
     .recipe__icon {
       height: 1.8rem;
       width: 1.8rem;
-      fill: #F59A83;
-      border: 1px solid #F59A83;
+      fill: #bf00ff;
+      border: 1px solid #bf00ff;
       border-radius: 50%;
       padding: 2px;
       margin-right: 1rem;

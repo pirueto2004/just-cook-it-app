@@ -1,0 +1,1 @@
+export const API_url = 'https://forkify-api.herokuapp.com/api/';

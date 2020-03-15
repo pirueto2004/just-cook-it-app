@@ -20,7 +20,8 @@
   "homepage": "https://github.com/pirueto2004/just-cook-it-app#readme",
   "dependencies": {
     "axios": "^0.19.2",
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
