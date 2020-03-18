@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {API_url} from '../config';
+import { formatCount} from '../views/recipeView';
 
 export default class Recipe {
     constructor(id) {
@@ -36,6 +37,7 @@ export default class Recipe {
     parseIngredients() {
         const unitsLong = ['tablespoons', 'tablespoon', 'Tbsp', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds'];
         const unitsShort = ['tbsp', 'tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'pound'];
+        const units = [...unitsShort, 'kg', 'g'];
 
         const newIngredients = this.ingredients.map(current => {
             //1. Uniform units
@@ -51,7 +53,7 @@ export default class Recipe {
             //3. Parse ingredients into count, unit and ingredient
             //Split ingredient string by using space separator and putting each element in an array
             const arrIng = ingredient.split(' ');
-            const unitIndex = arrIng.findIndex(element => unitsShort.includes(element));
+            const unitIndex = arrIng.findIndex(element => units.includes(element));
             
 
             let objIng;
@@ -106,4 +108,19 @@ export default class Recipe {
         });
         this.ingredients = newIngredients;
     }
-}
+
+    updateServings(type) {
+        //Servings
+        const newServings = type === 'dec' ? this.servings - 1 : this.servings + 1;
+
+        //Ingredients
+        this.ingredients.forEach(currIng => {
+            // currIng.count = currIng.count * (newServings / this.servings);
+            currIng.count *= (newServings / this.servings);
+                        
+        });
+
+        this.servings = newServings;
+    }
+};
+

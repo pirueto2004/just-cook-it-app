@@ -17,6 +17,14 @@ export const clearResults = () => {
     elements.searchResPages.innerHTML = '';
 };
 
+export const hightLightSelected = id => {
+    const resultsArr = Array.from(document.querySelectorAll('.results__link'));
+    resultsArr.forEach(el => {
+        el.classList.remove('results__link--active');
+    })
+    document.querySelector(`a[href="#${id}"]`).classList.toggle('results__link--active');
+};
+
 const limitRecipeTitle = (title, charLimit = 17) => {
     const newTitle = [];
     if (title.length > charLimit) {
