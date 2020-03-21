@@ -4,6 +4,8 @@ import {elements, renderLoader, clearLoader, searchResPages} from './views/base'
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import Recipe from './models/Recipe';
+import List from './models/List';
+import * as listView from './views/listView';
 
 /*
 import string from './models/Search';
@@ -25,6 +27,8 @@ console.log(`Using imported functions! ${searchView.add(searchView.ID, 2)} and $
 
 //Initial state is empty
 const state = {};
+//For testing purposes
+window.state = state;
 
 /***********************/
 /**SEARCH CONTROLLER ***/
@@ -115,7 +119,7 @@ const controlRecipe = async () => {
         try {
             //Get the recipe data and parse the ingredients
             await state.recipe.getRecipe();
-            console.log(state.recipe.ingredients);
+            // console.log(state.recipe.ingredients);
             state.recipe.parseIngredients();
 
             //Calculate servings and cooking time
@@ -133,7 +137,9 @@ const controlRecipe = async () => {
 
         
     }
-}
+};
+
+
 
 // window.addEventListener('hashchange', controlRecipe);
 // window.addEventListener('load', controlRecipe);
@@ -141,6 +147,40 @@ const controlRecipe = async () => {
 //The 2 lines of code above can be simplified in one single line as follows
 
 ['hashchange','load'].forEach(event => window.addEventListener(event, controlRecipe));
+
+/******************************/
+/**LIST CONTROLLER          ***/
+/******************************/
+
+const controlList = () => {
+    //Create a new list if there is none yet
+    if (!state.list) {
+        state.list = new List();
+    }
+
+    //Add each ingredient to the list and UI
+    state.recipe.ingredients.forEach(elem => {
+        const item = state.list.addItem(elem.count, elem.unit, elem.ingredient);
+        listView.renderItem(item);
+    });
+
+};
+
+//Handle delete and update list item events
+elements.shopping.addEventListener('click', event => {
+    const id = event.target.closest('.shopping__item').dataset.itemid;
+    //Handle the delete button
+    if (event.target.matches('.shopping__delete, .shopping__delete *')) {
+        //Delete from the state
+        state.list.deleteItem(id);
+        //Delete from the UI
+        listView.deleteItem(id);
+        //Handle the cou nt update
+    } else if (event.target.matches('.shopping__count-value')) {
+        const val = parseFloat(event.target.value, 10);
+        state.list.updateCount(id, val);
+    }
+});
 
 //Handling recipe buttons click
 elements.recipe.addEventListener('click', event => {
@@ -154,6 +194,13 @@ elements.recipe.addEventListener('click', event => {
         //Increase button is clicked
         state.recipe.updateServings('inc');
         recipeView.updateRecipe(state.recipe);
+    } else if (event.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
+        controlList();
     }
-    console.log(state.recipe);
+    // console.log(state.recipe);
 });
+
+window.l = new List();
+
+
+
