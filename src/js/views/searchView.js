@@ -22,10 +22,10 @@ export const hightLightSelected = id => {
     resultsArr.forEach(el => {
         el.classList.remove('results__link--active');
     })
-    document.querySelector(`a[href="#${id}"]`).classList.toggle('results__link--active');
+    document.querySelector(`.results__link[href="#${id}"]`).classList.toggle('results__link--active');
 };
 
-const limitRecipeTitle = (title, charLimit = 17) => {
+export const limitRecipeTitle = (title, charLimit = 17) => {
     const newTitle = [];
     if (title.length > charLimit) {
         //Split the title by space and accumulates current word into an array acc
