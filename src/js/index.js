@@ -32,7 +32,7 @@ console.log(`Using imported functions! ${searchView.add(searchView.ID, 2)} and $
 //Initial state is empty
 const state = {};
 //For testing purposes
-window.state = state;
+// window.state = state;
 
 /***********************/
 /**SEARCH CONTROLLER ***/
@@ -105,7 +105,7 @@ elements.searchResPages.addEventListener('click', event => {
 const controlRecipe = async () => {
     //Get the id from the url and remove the hash simbol from it
     const id = window.location.hash.replace('#', '');
-    console.log(id);
+    // console.log(id);
     if (id) {
         //Prepare UI for changes
         recipeView.clearRecipe();
@@ -200,7 +200,7 @@ const controlLike = () => {
 
         //Add like to the UI list
         likesView.renderLike(newLike);
-        console.log(state.likes);
+        // console.log(state.likes);
 
     //User HAS liked current recipe
     } else {
@@ -212,7 +212,7 @@ const controlLike = () => {
 
         //Remove like from the UI list
         likesView.deleteLike(currentID);
-        console.log(state.likes);
+        // console.log(state.likes);
     }
 
     likesView.toggleLikeMenu(state.likes.getNumLikes());
@@ -270,7 +270,7 @@ elements.recipe.addEventListener('click', event => {
     // console.log(state.recipe);
 });
 
-window.l = new List();
+// window.l = new List();
 
 
 
