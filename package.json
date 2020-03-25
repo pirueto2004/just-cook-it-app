@@ -2,11 +2,12 @@
   "name": "just-cook-it-app",
   "version": "1.0.0",
   "description": "cooking recipes app",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development --open",
-    "start": "node server.js",
-    "heroku-postbuild": "webpack -p"
+    "build": "webpack --mode production",
+    "start": "nodemon server.js",
+    "postinstall": "webpack -p"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,10 @@
   "dependencies": {
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "fractional": "^1.0.0",
+    "nodemon": "^2.0.2",
     "path": "^0.12.7",
     "uniqid": "^5.2.0"
   },
