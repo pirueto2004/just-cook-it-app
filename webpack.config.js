@@ -17,12 +17,7 @@ module.exports =  {
             fileName: './index.html',
             template: './src/index.html'
         }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                API_url: 'API_url',
-                'NODE_ENV': JSON.stringify('production')
-            },
-          }),
+        
     ],
     module: {
         rules: [
