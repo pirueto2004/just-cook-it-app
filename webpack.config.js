@@ -9,12 +9,13 @@ module.exports = {
     },
     // mode: 'development'
     devServer: {
-       contentBase: './dist'
+       contentBase: './dist',
+       open: true
     },
     plugins: [
         new HtmlWebpackPlugin({
-            fileName: 'index.html',
-            template: 'src/index.html'
+            fileName: './dist/index.html',
+            template: './src/index.html'
         }),
         
     ],
