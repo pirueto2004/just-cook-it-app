@@ -7,7 +7,7 @@
     "dev": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production",
     "start": "nodemon server.js",
-    "heroku-postbuild": "webpack --mode production"
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
