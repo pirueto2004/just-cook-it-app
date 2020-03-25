@@ -5,19 +5,24 @@ module.exports =  {
     entry: ['babel-polyfill','./src/js/index.js'],
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/',
         filename: 'js/bundle.js'
-       
     },
     // mode: 'development'
     devServer: {
+        port: 8080,
         contentBase: './dist'
     },
     plugins: [
         new HtmlWebpackPlugin({
-            fileName: 'index.html',
+            fileName: './index.html',
             template: './src/index.html'
-        })
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                API_url: 'API_url',
+                'NODE_ENV': JSON.stringify('production')
+            },
+          }),
     ],
     module: {
         rules: [
