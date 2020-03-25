@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(absPath));
 
-router.get('/', (req,res) => {
+router.get('*', (req,res) => {
     res.sendFile(path.resolve(absPath, '/index.html'));
 });
 
