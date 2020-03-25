@@ -1,8 +1,8 @@
 const path = require('path'); //'path' is an npm built-in package
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports =  {
-    entry: ['babel-polyfill','./src/js/index.js'],
+module.exports = {
+    entry: ['babel-polyfill', './src/js/index.js'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/bundle.js'
@@ -14,7 +14,7 @@ module.exports =  {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            fileName: '.dist/index.html',
+            fileName: 'index.html',
             template: './src/index.html'
         }),
         
