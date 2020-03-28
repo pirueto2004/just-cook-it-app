@@ -1,5 +1,12 @@
 <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
+<symbol id="icon-circle-with-plus-sign" viewBox="0 0 20 20">
+    <title>circle-with-plus-sign</title>
+    <!-- <circle cx="50" cy="50" r="30" stroke="black" stroke-width="1" fill="white" /> -->
+    <line x1="25" y1="50" x2="75" y2="50" stroke="black" stroke-width="2" />
+    <line x1="50" y1="25" x2="50" y2="75" stroke="black" stroke-width="2" />
+</symbol>   
+
 <symbol id="icon-triangle-left" viewBox="0 0 20 20">
 <title>triangle-left</title>
 <path d="M14 5v10l-9-5 9-5z"></path>

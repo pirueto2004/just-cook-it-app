@@ -140,7 +140,7 @@ SVG Icons - svgicons.sparkk.fr
     .btn-inline span {
       margin: 0 .4rem; }
     .btn-inline:hover {
-      color: #F48982;
+      color:  #bf00ff;
       background-color: #F2EFEE; }
     .btn-inline:focus {
       outline: none; }
@@ -154,18 +154,20 @@ SVG Icons - svgicons.sparkk.fr
     .btn-tiny svg {
       height: 100%;
       width: 100%;
-      fill: #F59A83;
+      fill:  #bf00ff;
       transition: all .3s; }
     .btn-tiny:focus {
       outline: none; }
     .btn-tiny:hover svg {
-      fill: #F48982;
+      fill:  #bf00ff;
       transform: translateY(-1px); }
     .btn-tiny:active svg {
-      fill: #F48982;
+      fill:  #bf00ff;
       transform: translateY(0); }
     .btn-tiny:not(:last-child) {
       margin-right: .3rem; }
+
+  
   
   .heading-2 {
     font-size: 1.8rem;
@@ -537,4 +539,43 @@ SVG Icons - svgicons.sparkk.fr
     .shopping__item:hover .shopping__delete {
       opacity: 1;
       visibility: visible; }
+
+      .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 0px dotted black;
+      }
+      
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      
+      .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+      }
+      
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+      }
   

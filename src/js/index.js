@@ -172,7 +172,7 @@ const controlList = () => {
             
         });
 
-        //Add a delete button to UI for all items
+        //Add a delete shopping list button to UI
         listView.deleteButton();
     }
 
@@ -282,7 +282,7 @@ elements.recipe.addEventListener('click', event => {
         state.recipe.updateServings('inc');
         recipeView.updateRecipe(state.recipe);
 
-        //Add ingredients to shopping list
+        //Add all of the ingredients to shopping list
     } else if (event.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
         controlList();
     } else if (event.target.matches('.recipe__love, .recipe__love *')) {
