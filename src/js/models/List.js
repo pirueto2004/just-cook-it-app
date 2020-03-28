@@ -26,6 +26,12 @@ export default class List {
     }
 
     updateCount (id, newCount) {
-        this.items.fincd(el => el.id === id).count = newCount;
+        this.items.find(el => el.id === id).count = newCount;
     }
+
+    deleteAllItems () {
+        //empty your array
+        this.items.length = 0;
+    }
+    
 }

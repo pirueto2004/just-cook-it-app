@@ -170,7 +170,10 @@ const controlList = () => {
     state.recipe.ingredients.forEach(elem => {
         const item = state.list.addItem(elem.count, elem.unit, elem.ingredient);
         listView.renderItem(item);
+        
     });
+    //Add a delete button to UI for all items
+    listView.deleteButton();
 
 };
 
@@ -245,6 +248,23 @@ elements.shopping.addEventListener('click', event => {
     } else if (event.target.matches('.shopping__count-value')) {
         const val = parseFloat(event.target.value, 10);
         state.list.updateCount(id, val);
+    }
+});
+
+//Handle delete shopping list event
+elements.deleteAll.addEventListener('click', event => {
+    if (event.target.matches('.delete-btn, .delete-btn *')) {
+        
+        //Delete shopping list from the UI
+        listView.clearShoppingList();
+
+        //Delete shopping list items from the state
+        
+        // state.list.items.forEach((elem, index) => {
+        //     console.log(state.list.items[index]);
+        // });
+        state.list.deleteAllItems();
+        // console.log(state.list.items);
     }
 });
 

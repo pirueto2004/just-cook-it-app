@@ -39,8 +39,53 @@
       .container {
         width: 100%;
         margin: 0;
-        border-radius: 0; } }
-  
+        border-radius: 0; }
+   }
+
+   .delete__all {
+    text-align: center;
+    padding: 3rem 0rem;
+   }  
+
+   /* -----
+SVG Icons - svgicons.sparkk.fr
+----- */
+.delete-btn {
+  padding: 1.3rem 1.3rem;
+  font-size: 1.4rem;
+  background-image: linear-gradient(to right bottom, rgb(245, 247, 250), rgb(247, 93, 82));
+  border-radius: 10rem;
+    border: none;
+    text-transform: uppercase;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all .2s; }
+    .delete-btn:hover {
+      transform: scale(1.05); }
+    .delete-btn:focus {
+      outline: none; }
+    .delete-btn > *:first-child {
+      margin-right: 1rem; 
+}
+
+.delete-btn .svg-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill:rgb(255, 255, 255);
+}
+
+.svg-icon circle {
+  stroke: rgb(255, 255, 255);
+  stroke-width: 1;
+}
+
   .btn, .btn-small, .btn-small:link, .btn-small:visited {
     background-image: linear-gradient(to right bottom, rgb(245, 247, 250), rgb(191, 0, 255));
     border-radius: 10rem;
