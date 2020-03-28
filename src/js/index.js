@@ -164,16 +164,17 @@ const controlList = () => {
     //Create a new list if there is none yet
     if (!state.list) {
         state.list = new List();
-    }
 
-    //Add each ingredient to the list and UI
-    state.recipe.ingredients.forEach(elem => {
-        const item = state.list.addItem(elem.count, elem.unit, elem.ingredient);
-        listView.renderItem(item);
-        
-    });
-    //Add a delete button to UI for all items
-    listView.deleteButton();
+        //Add each ingredient to the list and UI
+        state.recipe.ingredients.forEach(elem => {
+            const item = state.list.addItem(elem.count, elem.unit, elem.ingredient);
+            listView.renderItem(item);
+            
+        });
+
+        //Add a delete button to UI for all items
+        listView.deleteButton();
+    }
 
 };
 
@@ -280,6 +281,7 @@ elements.recipe.addEventListener('click', event => {
         //Increase button is clicked
         state.recipe.updateServings('inc');
         recipeView.updateRecipe(state.recipe);
+
         //Add ingredients to shopping list
     } else if (event.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
         controlList();
