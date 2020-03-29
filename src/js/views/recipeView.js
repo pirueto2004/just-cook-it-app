@@ -25,9 +25,9 @@ export const formatCount = count => {
     return '?';
 };
 
-const createIngredient = ingredient => `
-    <li class="recipe__item">
-       <button class="btn-tiny tooltip" id="btn-add" >
+const createIngredient = (ingredient, index) => `
+    <li class="recipe__item" data-tag=${index}>
+       <button class="btn-tiny tooltip btn-add-shopping">
             <span class="tooltiptext">Add to shopping list</span>
             <svg>
                 <use href="img/icons.svg#icon-circle-with-plus"></use>
@@ -40,6 +40,7 @@ const createIngredient = ingredient => `
         </div>
     </li>
 `;
+
 
 export const renderRecipe = (recipe, isLiked) => {
     const markup = `
@@ -90,7 +91,7 @@ export const renderRecipe = (recipe, isLiked) => {
 
         <div class="recipe__ingredients">
             <ul class="recipe__ingredient-list">
-                ${recipe.ingredients.map(elem => createIngredient(elem)).join('')}
+                ${recipe.ingredients.map((elem, index) => createIngredient(elem, index)).join('')}
             </ul>
 
             <button class="btn-small recipe__btn recipe__btn--add">

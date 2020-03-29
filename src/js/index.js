@@ -178,6 +178,21 @@ const controlList = () => {
 
 };
 
+const controlListItem = (count, unit, ingredient) => {
+    if (!state.list) {
+        state.list = new List();
+    }
+    const ing = state.list.addItem(count, unit, ingredient);
+    
+    //Add item to the UI
+    listView.renderItem(ing);
+        
+    if (state.list.items.length === 1) {
+        //Add a delete shopping list button to UI
+        listView.deleteButton();
+    }
+};
+
 /******************************/
 /**LIKE CONTROLLER          ***/
 /******************************/
@@ -285,7 +300,15 @@ elements.recipe.addEventListener('click', event => {
         //Add all of the ingredients to shopping list
     } else if (event.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
         controlList();
-    } else if (event.target.matches('.recipe__love, .recipe__love *')) {
+
+        //Add selected ingredient to shopping list
+    }else if (event.target.matches('.btn-add-shopping, .btn-add-shopping *')){
+        const id = event.target.closest('li').dataset.tag;
+        const item = state.recipe.ingredients[id];
+        controlListItem(item.count, item.unit, item.ingredient);
+
+        //Add or remove like to recipe
+    }else if (event.target.matches('.recipe__love, .recipe__love *')) {
         //Like controller
         controlLike();
     }
