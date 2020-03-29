@@ -26,7 +26,7 @@ export const formatCount = count => {
 };
 
 const createIngredient = (ingredient, index) => `
-    <li class="recipe__item" data-tag=${index}>
+    <li class="recipe__item" data-tag="${index}">
        <button class="btn-tiny tooltip btn-add-shopping">
             <span class="tooltiptext">Add to shopping list</span>
             <svg>
@@ -36,7 +36,7 @@ const createIngredient = (ingredient, index) => `
         <div class="recipe__count">${formatCount(ingredient.count)}</div>
         <div class="recipe__ingredient">
             <span class="recipe__unit">${ingredient.unit}</span>
-            ${ingredient.ingredient}
+            <span>${ingredient.ingredient}</span>
         </div>
     </li>
 `;

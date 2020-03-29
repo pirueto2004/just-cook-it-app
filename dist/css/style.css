@@ -152,8 +152,8 @@ SVG Icons - svgicons.sparkk.fr
     background: none;
     cursor: pointer; }
     .btn-tiny svg {
-      height: 100%;
-      width: 100%;
+      height: 1.5rem;
+      width: 1.5rem;
       fill:  #bf00ff;
       transition: all .3s; }
     .btn-tiny:focus {
