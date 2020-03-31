@@ -19,7 +19,7 @@
     font-weight: 400;
     line-height: 1.6;
     color: #655A56;
-    background-image: linear-gradient(to right bottom, rgb(238, 245, 255), rgb(8, 176, 243));
+    background-image: linear-gradient(to right bottom, rgb(255, 235, 220), rgb(254, 171, 109));
     background-size: cover;
     background-repeat: no-repeat;
     min-height: calc(100vh - 2 * 4vw); }
@@ -88,7 +88,7 @@ SVG Icons - svgicons.sparkk.fr
 }
 
   .btn, .btn-small, .btn-small:link, .btn-small:visited {
-    background-image: linear-gradient(to right bottom, rgb(245, 247, 250), rgb(191, 0, 255));
+    background-image: linear-gradient(to right bottom, rgb(253, 221, 252), rgb(154, 7, 148));
     border-radius: 10rem;
     border: none;
     text-transform: uppercase;
@@ -132,7 +132,7 @@ SVG Icons - svgicons.sparkk.fr
       fill: currentColor; }
   
   .btn-inline {
-    color: #bf00ff;
+    color: #9a0794;
     font-size: 1.2rem;
     border: none;
     background-color: #F9F5F3;
@@ -150,7 +150,7 @@ SVG Icons - svgicons.sparkk.fr
     .btn-inline span {
       margin: 0 .4rem; }
     .btn-inline:hover {
-      color:  #bf00ff;
+      color:  #9a0794;
       background-color: #F2EFEE; }
     .btn-inline:focus {
       outline: none; }
@@ -164,15 +164,15 @@ SVG Icons - svgicons.sparkk.fr
     .btn-tiny svg {
       height: 1.5rem;
       width: 1.5rem;
-      fill:  #bf00ff;
+      fill:  #9a0794;
       transition: all .3s; }
     .btn-tiny:focus {
       outline: none; }
     .btn-tiny:hover svg {
-      fill:  #bf00ff;
+      fill:  #9a0794;
       transform: translateY(-1px); }
     .btn-tiny:active svg {
-      fill:  #bf00ff;
+      fill:  #9a0794;
       transform: translateY(0); }
     .btn-tiny:not(:last-child) {
       margin-right: .3rem; }
@@ -182,7 +182,7 @@ SVG Icons - svgicons.sparkk.fr
   .heading-2 {
     font-size: 1.8rem;
     font-weight: 600;
-    color: #bf00ff;
+    color: #9a0794;
     text-transform: uppercase;
     margin-bottom: 2.5rem;
     text-align: center;
@@ -203,7 +203,7 @@ SVG Icons - svgicons.sparkk.fr
     .loader svg {
       height: 5.5rem;
       width: 5.5rem;
-      fill: #bf00ff;
+      fill: #9a0794;
       transform-origin: 44% 50%;
       animation: rotate 1.5s infinite linear; }
   
@@ -265,7 +265,7 @@ SVG Icons - svgicons.sparkk.fr
       visibility: visible;
       opacity: 1; }
     .likes__icon {
-      fill: #bf00ff;
+      fill: #9a0794;
       height: 3.75rem;
       width: 3.75rem; }
     .likes__panel {
@@ -321,7 +321,7 @@ SVG Icons - svgicons.sparkk.fr
         position: absolute;
         top: 0;
         left: 0;
-        background-image: linear-gradient(to right bottom, #FBDB89, #bf00ff);
+        background-image: linear-gradient(to right bottom, #FBDB89, #9a0794);
         opacity: .4; }
       .results__fig img,
       .likes__fig img {
@@ -333,7 +333,7 @@ SVG Icons - svgicons.sparkk.fr
     .results__name,
     .likes__name {
       font-size: 1.3rem;
-      color: #bf00ff;
+      color: #9a0794;
       text-transform: uppercase;
       font-weight: 600;
       margin-bottom: .3rem; }
@@ -376,7 +376,7 @@ SVG Icons - svgicons.sparkk.fr
         position: absolute;
         top: 0;
         left: 0;
-        background-image: linear-gradient(to right bottom, #FBDB89, #bf00ff);
+        /* background-image: linear-gradient(to right bottom, #FBDB89, #9a0794); */
         opacity: .6; }
     .recipe__img {
       width: 100%;
@@ -399,7 +399,7 @@ SVG Icons - svgicons.sparkk.fr
         -webkit-box-decoration-break: clone;
         box-decoration-break: clone;
         padding: 1.3rem 2rem;
-        background-image: linear-gradient(to right bottom, #FBDB89, #bf00ff); }
+        background-image: linear-gradient(to right bottom, #FBDB89, #9a0794); }
     .recipe__details {
       display: flex;
       align-items: center;
@@ -414,7 +414,7 @@ SVG Icons - svgicons.sparkk.fr
     .recipe__info-icon {
       height: 2rem;
       width: 2rem;
-      fill: #bf00ff;
+      fill: #9a0794;
       margin-right: 1rem; }
     .recipe__info-data {
       margin-right: .4rem;
@@ -431,7 +431,7 @@ SVG Icons - svgicons.sparkk.fr
       opacity: 1;
       transform: translateY(0); }
     .recipe__love {
-      background-image: linear-gradient(to right bottom, rgb(252, 229, 249), #bf00ff);
+      background-image: linear-gradient(to right bottom, rgb(252, 229, 249), #9a0794);
       border-radius: 50%;
       border: none;
       cursor: pointer;
@@ -470,8 +470,8 @@ SVG Icons - svgicons.sparkk.fr
     .recipe__icon {
       height: 1.8rem;
       width: 1.8rem;
-      fill: #bf00ff;
-      border: 1px solid #bf00ff;
+      fill: #9a0794;
+      border: 1px solid #9a0794;
       border-radius: 50%;
       padding: 2px;
       margin-right: 1rem;
