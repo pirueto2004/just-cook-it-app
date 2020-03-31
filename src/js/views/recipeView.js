@@ -27,7 +27,7 @@ export const formatCount = count => {
 
 const createIngredient = (ingredient, index) => `
     <li class="recipe__item" data-tag="${index}">
-       <button class="btn-tiny tooltip btn-add-shopping">
+       <button type="button" class="btn-tiny tooltip btn-add-shopping" id="btn${index}">
             <span class="tooltiptext">Add to shopping list</span>
             <svg>
                 <use href="img/icons.svg#icon-circle-with-plus"></use>
@@ -41,6 +41,16 @@ const createIngredient = (ingredient, index) => `
     </li>
 `;
 
+const disableElem = (elemId) => {
+    const el = document.getElementById(elemId);
+    if(!el.classList.contains('btn-disable')) el.classList.add('btn-disable');
+};
+
+export const updateIngredientIcon = (id) => {
+  const item =  document.querySelector(`[data-tag="${id}"] use`);
+  item.setAttribute('href', 'img/icons.svg#icon-check'); 
+  disableElem(`btn${id}`);
+};
 
 export const renderRecipe = (recipe, isLiked) => {
     const markup = `

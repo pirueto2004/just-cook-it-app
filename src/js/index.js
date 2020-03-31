@@ -166,10 +166,10 @@ const controlList = () => {
         state.list = new List();
 
         //Add each ingredient to the list and UI
-        state.recipe.ingredients.forEach(elem => {
+        state.recipe.ingredients.forEach((elem, index) => {
             const item = state.list.addItem(elem.count, elem.unit, elem.ingredient);
             listView.renderItem(item);
-            
+            recipeView.updateIngredientIcon(index);
         });
 
         //Add a delete shopping list button to UI
@@ -178,7 +178,7 @@ const controlList = () => {
 
 };
 
-const controlListItem = (count, unit, ingredient) => {
+const controlListItem = (id, count, unit, ingredient) => {
     if (!state.list) {
         state.list = new List();
     }
@@ -186,6 +186,8 @@ const controlListItem = (count, unit, ingredient) => {
     
     //Add item to the UI
     listView.renderItem(ing);
+
+    recipeView.updateIngredientIcon(id);
         
     if (state.list.items.length === 1) {
         //Add a delete shopping list button to UI
@@ -303,10 +305,20 @@ elements.recipe.addEventListener('click', event => {
 
         //Add selected ingredient to shopping list
     }else if (event.target.matches('.btn-add-shopping, .btn-add-shopping *')){
+        
+        //Get the id of the <li> closest to the clicked element
         const id = event.target.closest('li').dataset.tag;
+        //Get the ingredient with that id from the recipe ingredients 
         const item = state.recipe.ingredients[id];
-        controlListItem(item.count, item.unit, item.ingredient);
+        
+        // const btnDisabled = event.target.closest('button').setAttribute('disabled', false);
 
+        // if (!btnDisabled) {
+           
+            //Add ingredient to shopping list
+            controlListItem(id, item.count, item.unit, item.ingredient);
+        // }
+      
         //Add or remove like to recipe
     }else if (event.target.matches('.recipe__love, .recipe__love *')) {
         //Like controller

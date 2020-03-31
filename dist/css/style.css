@@ -111,6 +111,16 @@ SVG Icons - svgicons.sparkk.fr
       height: 2.25rem;
       width: 2.25rem;
       fill: currentColor; }
+
+  .btn-disable {
+  cursor: not-allowed;
+  pointer-events: none;
+
+  /*Button disabled - CSS color class*/
+  color: #c0c0c0;
+  background-color: #ffffff;
+
+  }
   
   .btn-small, .btn-small:link, .btn-small:visited {
     font-size: 1.3rem;
