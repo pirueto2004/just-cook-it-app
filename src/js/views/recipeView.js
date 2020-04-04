@@ -46,9 +46,12 @@ const disableElem = (elemId) => {
     if(!el.classList.contains('btn-disable')) el.classList.add('btn-disable');
 };
 
+//Change ingredient icon-circle-with-plus to icon-check when clicked and added to shopping list
 export const updateIngredientIcon = (id) => {
   const item =  document.querySelector(`[data-tag="${id}"] use`);
   item.setAttribute('href', 'img/icons.svg#icon-check'); 
+
+  //Disable icon button when clicked
   disableElem(`btn${id}`);
 };
 

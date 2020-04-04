@@ -109,6 +109,10 @@ const controlRecipe = async () => {
     if (id) {
         //Prepare UI for changes
         recipeView.clearRecipe();
+
+        //Delete shopping list from the UI
+        listView.clearShoppingList();
+
         renderLoader(elements.recipe);
 
         //Highlight selected search item
@@ -178,15 +182,20 @@ const controlList = () => {
 
 };
 
+//Add manually each ingredient to shopping list and UI
 const controlListItem = (id, count, unit, ingredient) => {
+    //Create a new list if there is none yet
     if (!state.list) {
         state.list = new List();
     }
-    const ing = state.list.addItem(count, unit, ingredient);
+
+    //Add ingredient to the list
+    const item = state.list.addItem(count, unit, ingredient);
     
     //Add item to the UI
-    listView.renderItem(ing);
+    listView.renderItem(item);
 
+    //Update ingredient icon on the UI
     recipeView.updateIngredientIcon(id);
         
     if (state.list.items.length === 1) {
@@ -253,15 +262,69 @@ window.addEventListener('load', () => {
     state.likes.likes.forEach(like => likesView.renderLike(like));
 });
 
+//Restore saved shopping list on page load
+window.addEventListener('load', () => {
+    const storage = JSON.parse(localStorage.getItem('items'));
+        
+    if (storage) {
+        
+        state.list = new List();
+
+        //Restore items from the localStorage
+        state.list.readStorage();
+
+        //Render the existing shopping items
+        state.list.items.forEach(item => listView.renderItem(item));
+
+        //Add a delete shopping list button to UI
+        listView.deleteButton();
+    }
+});
+
+
 //Handle delete and update list item events
 elements.shopping.addEventListener('click', event => {
-    const id = event.target.closest('.shopping__item').dataset.itemid;
+    let id = event.target.closest('.shopping__item').dataset.itemid;
+    
     //Handle the delete button
     if (event.target.matches('.shopping__delete, .shopping__delete *')) {
-        //Delete from the state
+
         state.list.deleteItem(id);
-        //Delete from the UI
+
         listView.deleteItem(id);
+
+        // //Retrieve items in localStorage
+        // let storedItems = JSON.parse(localStorage.getItem('items'));
+
+        // //Find the index of item to remove from the array
+        // const index = storedItems.findIndex(item =>item.id === id);
+
+        //If there are items in localStorage
+        // if (storedItems) {
+
+           
+
+            //Remove item at index position in the array
+            // storedItems.splice(index, 1);
+
+            // //Update items in localStorage 
+            // localStorage.setItem('items', JSON.stringify(storedItems));
+
+            // //Retrieve items in localStorage
+            // storedItems = JSON.parse(localStorage.getItem('items'));
+
+            // console.log(storedItems);
+          
+                       
+        // } else {
+        //    //Delete from the state
+        //     state.list.deleteItem(id);
+            
+        // }
+
+        // //Delete from the UI
+        // listView.deleteItem(id);
+        
         //Handle the count update
     } else if (event.target.matches('.shopping__count-value')) {
         const val = parseFloat(event.target.value, 10);
@@ -281,7 +344,14 @@ elements.deleteAll.addEventListener('click', event => {
         // state.list.items.forEach((elem, index) => {
         //     console.log(state.list.items[index]);
         // });
-        state.list.deleteAllItems();
+        const storage = JSON.parse(localStorage.getItem('items'));
+        
+        if (storage) {
+            localStorage.clear();
+        } else {
+            state.list.deleteAllItems();
+        }
+        
         // console.log(state.list.items);
     }
 });
@@ -308,15 +378,12 @@ elements.recipe.addEventListener('click', event => {
         
         //Get the id of the <li> closest to the clicked element
         const id = event.target.closest('li').dataset.tag;
+
         //Get the ingredient with that id from the recipe ingredients 
         const item = state.recipe.ingredients[id];
         
-        // const btnDisabled = event.target.closest('button').setAttribute('disabled', false);
-
-        // if (!btnDisabled) {
-           
-            //Add ingredient to shopping list
-            controlListItem(id, item.count, item.unit, item.ingredient);
+        //Add ingredient to shopping list
+        controlListItem(id, item.count, item.unit, item.ingredient);
         // }
       
         //Add or remove like to recipe

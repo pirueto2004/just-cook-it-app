@@ -14,6 +14,7 @@ export default class List {
             ingredient
         }
         this.items.push(item);
+        this.persistListItem();
         return item;
     }
 
@@ -23,6 +24,9 @@ export default class List {
         //[2, 4, 8] slice(1, 2) -> returns 4, original array is [2, 4, 8]
         //delete the item at the index position
         this.items.splice(index, 1);
+
+        //Persist data in the localStorage 
+        this.persistListItem();
     }
 
     updateCount (id, newCount) {
@@ -33,5 +37,18 @@ export default class List {
         //empty your array
         this.items.length = 0;
     }
+
+    persistListItem () {
+        localStorage.setItem('items', JSON.stringify(this.items));    
+    }
+
+    readStorage () {
+        const storedItems = localStorage.getItem('items');
+
+        //Restoring items from the localStorage
+        this.items = storedItems ? JSON.parse(storedItems) : [];
+
+        // if (storage) this.items = storage;
+    }
     
-}
+};
