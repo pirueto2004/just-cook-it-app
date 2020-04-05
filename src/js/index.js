@@ -103,6 +103,7 @@ elements.searchResPages.addEventListener('click', event => {
 // console.log(rec);
 
 const controlRecipe = async () => {
+
     //Get the id from the url and remove the hash simbol from it
     const id = window.location.hash.replace('#', '');
     // console.log(id);
@@ -142,6 +143,8 @@ const controlRecipe = async () => {
                 state.likes.isLiked(id)
             );
 
+            
+       
         } catch(error) {
             console.log(error);
             alert('Error processing recipe :(');
@@ -149,6 +152,7 @@ const controlRecipe = async () => {
 
         
     }
+    
 };
 
 
@@ -165,6 +169,7 @@ const controlRecipe = async () => {
 /******************************/
 
 const controlList = () => {
+
     //Create a new list if there is none yet
     if (!state.list) {
         state.list = new List();
@@ -173,12 +178,24 @@ const controlList = () => {
         state.recipe.ingredients.forEach((elem, index) => {
             const item = state.list.addItem(elem.count, elem.unit, elem.ingredient);
             listView.renderItem(item);
-            recipeView.updateIngredientIcon(index);
+            // recipeView.updateIngredientIcon(index);
+            const isChecked = false;
+
+            //Update ingredient icon on the UI
+            // recipeView.updateIngredientIcon(id);
+            if (!isChecked) {
+                recipeView.toggleIconBtn(index, true);
+            }
+            // recipeView.toggleIconBtn(index, true);
         });
 
         //Add a delete shopping list button to UI
         listView.deleteButton();
+        
     }
+
+    //Disable add to shopping list button after clicking on it
+    // document.querySelector('.recipe__btn--add').classList.toggle('btn-disable');
 
 };
 
@@ -195,8 +212,18 @@ const controlListItem = (id, count, unit, ingredient) => {
     //Add item to the UI
     listView.renderItem(item);
 
+    // console.log(state.list.items.indexOf(item));
+
+    // let itemID = state.list.items.indexOf(item);
+
+    const isChecked = false;
+
     //Update ingredient icon on the UI
-    recipeView.updateIngredientIcon(id);
+    // recipeView.updateIngredientIcon(id);
+    if (!isChecked) {
+        recipeView.toggleIconBtn(id, true);
+    }
+    
         
     if (state.list.items.length === 1) {
         //Add a delete shopping list button to UI
@@ -207,8 +234,6 @@ const controlListItem = (id, count, unit, ingredient) => {
 /******************************/
 /**LIKE CONTROLLER          ***/
 /******************************/
-
-
 
 const controlLike = () => {
     //Create a new Like object if there is NONE yet
@@ -250,6 +275,7 @@ const controlLike = () => {
 
 //Restore liked recipes on page load
 window.addEventListener('load', () => {
+
     state.likes = new Likes();
 
     //Restore likes from the localStorage
@@ -264,6 +290,10 @@ window.addEventListener('load', () => {
 
 //Restore saved shopping list on page load
 window.addEventListener('load', () => {
+
+    //Delete shopping list from the UI
+    listView.clearShoppingList();
+   
     const storage = JSON.parse(localStorage.getItem('items'));
         
     if (storage) {
@@ -278,7 +308,11 @@ window.addEventListener('load', () => {
 
         //Add a delete shopping list button to UI
         listView.deleteButton();
+
+              
     }
+
+       
 });
 
 
@@ -293,38 +327,20 @@ elements.shopping.addEventListener('click', event => {
 
         listView.deleteItem(id);
 
-        // //Retrieve items in localStorage
-        // let storedItems = JSON.parse(localStorage.getItem('items'));
+        if (state.list.items.length === 0) {
+            //Delete shopping list from the UI
+            listView.clearShoppingList();
+            //Delete shopping list items from the localStorage
+            localStorage.clear();
 
-        // //Find the index of item to remove from the array
-        // const index = storedItems.findIndex(item =>item.id === id);
-
-        //If there are items in localStorage
-        // if (storedItems) {
+             //Disable add to shopping list button after clicking on it
+            //  document.querySelector('.recipe__btn--add').classList.remove('btn-disable');
+             
+            controlRecipe();
 
            
-
-            //Remove item at index position in the array
-            // storedItems.splice(index, 1);
-
-            // //Update items in localStorage 
-            // localStorage.setItem('items', JSON.stringify(storedItems));
-
-            // //Retrieve items in localStorage
-            // storedItems = JSON.parse(localStorage.getItem('items'));
-
-            // console.log(storedItems);
-          
-                       
-        // } else {
-        //    //Delete from the state
-        //     state.list.deleteItem(id);
-            
-        // }
-
-        // //Delete from the UI
-        // listView.deleteItem(id);
-        
+        }
+      
         //Handle the count update
     } else if (event.target.matches('.shopping__count-value')) {
         const val = parseFloat(event.target.value, 10);
@@ -336,24 +352,30 @@ elements.shopping.addEventListener('click', event => {
 elements.deleteAll.addEventListener('click', event => {
     if (event.target.matches('.delete-btn, .delete-btn *')) {
         
+        const storage = JSON.parse(localStorage.getItem('items'));
+        
+        if (storage) {
+
+            //Delete shopping list items from the localStorage
+            localStorage.clear();
+
+        }
+
         //Delete shopping list from the UI
         listView.clearShoppingList();
 
         //Delete shopping list items from the state
-        
-        // state.list.items.forEach((elem, index) => {
-        //     console.log(state.list.items[index]);
-        // });
-        const storage = JSON.parse(localStorage.getItem('items'));
-        
-        if (storage) {
-            localStorage.clear();
-        } else {
-            state.list.deleteAllItems();
-        }
+        state.list.deleteAllItems();
+
+        //Disable add to shopping list button after clicking on it
+        // document.querySelector('.recipe__btn--add').classList.remove('btn-disable');
+           
+        //Update ingredient icons on the UI
+        controlRecipe();
         
         // console.log(state.list.items);
     }
+     
 });
 
 //Handling recipe buttons click
@@ -371,6 +393,10 @@ elements.recipe.addEventListener('click', event => {
 
         //Add all of the ingredients to shopping list
     } else if (event.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
+        
+        //Disable add to shopping list button after clicking on it
+        // document.querySelector('.recipe__btn--add').classList.add('btn-disable');
+
         controlList();
 
         //Add selected ingredient to shopping list
@@ -393,6 +419,8 @@ elements.recipe.addEventListener('click', event => {
     }
     // console.log(state.recipe);
 });
+
+
 
 // window.l = new List();
 

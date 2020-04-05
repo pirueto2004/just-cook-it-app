@@ -113,12 +113,12 @@ SVG Icons - svgicons.sparkk.fr
       fill: currentColor; }
 
   .btn-disable {
-  cursor: not-allowed;
-  pointer-events: none;
+    cursor: not-allowed;
+    pointer-events: none;
 
-  /*Button disabled - CSS color class*/
-  color: #c0c0c0;
-  background-color: #ffffff;
+    /*Button disabled - CSS color class*/
+    color: #c0c0c0;
+    background-color: #ffffff;
 
   }
   

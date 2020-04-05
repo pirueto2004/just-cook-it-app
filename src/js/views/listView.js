@@ -1,4 +1,6 @@
 import {elements} from './base';
+import * as recipeView from './recipeView';
+
 
 
 export const deleteButton = () => {
@@ -14,6 +16,8 @@ export const deleteButton = () => {
 
     // 2. Append after the shopping list
     elements.deleteAll.insertAdjacentHTML('beforeend', markup);
+
+   
    
 };
 
@@ -42,12 +46,14 @@ export const renderItem = item => {
 export const deleteItem = id => {
     const item = document.querySelector(`[data-itemid="${id}"]`);
     if (item) item.parentElement.removeChild(item);
+    
 };
 
 export const clearShoppingList = () => {
+    elements.shopping.innerHTML = ''; 
     elements.deleteAll.innerHTML = '';
-    elements.shopping.innerHTML = '';
-    
+    //Disable add to shopping list button after clicking on it
+    // document.querySelector('.recipe__btn--add').classList.remove('btn-disable');
 };
 
 

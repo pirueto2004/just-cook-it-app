@@ -1,5 +1,7 @@
 //Importing a Unique ID generator
 import uniqid from 'uniqid';
+import {elements} from '../views/base';
+import * as listView from '../views/listView';
 
 export default class List {
     constructor() {
@@ -27,6 +29,7 @@ export default class List {
 
         //Persist data in the localStorage 
         this.persistListItem();
+        if (this.items.length === 0) listView.clearShoppingList();
     }
 
     updateCount (id, newCount) {
