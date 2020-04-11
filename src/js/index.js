@@ -106,6 +106,7 @@ const controlRecipe = async () => {
 
     //Get the id from the url and remove the hash simbol from it
     const id = window.location.hash.replace('#', '');
+
     // console.log(id);
     if (id) {
         //Prepare UI for changes
@@ -113,6 +114,9 @@ const controlRecipe = async () => {
 
         //Delete shopping list from the UI
         listView.clearShoppingList();
+
+        //Clear localStorage
+        // localStorage.clear();
 
         renderLoader(elements.recipe);
 
@@ -126,6 +130,7 @@ const controlRecipe = async () => {
         // window.r = state.recipe;
 
         try {
+            
             //Get the recipe data and parse the ingredients
             await state.recipe.getRecipe();
             // console.log(state.recipe.ingredients);
@@ -138,11 +143,12 @@ const controlRecipe = async () => {
             //Render the recipe
             // console.log(state.recipe);
             clearLoader();
+            
             recipeView.renderRecipe(
                 state.recipe,
                 state.likes.isLiked(id)
             );
-
+            
             
        
         } catch(error) {
@@ -178,24 +184,21 @@ const controlList = () => {
         state.recipe.ingredients.forEach((elem, index) => {
             const item = state.list.addItem(elem.count, elem.unit, elem.ingredient);
             listView.renderItem(item);
-            // recipeView.updateIngredientIcon(index);
+            
+            //Set initial state of ingredient icon to NOT checked
             const isChecked = false;
 
             //Update ingredient icon on the UI
-            // recipeView.updateIngredientIcon(id);
             if (!isChecked) {
                 recipeView.toggleIconBtn(index, true);
             }
-            // recipeView.toggleIconBtn(index, true);
+            
         });
 
         //Add a delete shopping list button to UI
         listView.deleteButton();
         
     }
-
-    //Disable add to shopping list button after clicking on it
-    // document.querySelector('.recipe__btn--add').classList.toggle('btn-disable');
 
 };
 
@@ -219,7 +222,6 @@ const controlListItem = (id, count, unit, ingredient) => {
     const isChecked = false;
 
     //Update ingredient icon on the UI
-    // recipeView.updateIngredientIcon(id);
     if (!isChecked) {
         recipeView.toggleIconBtn(id, true);
     }
@@ -291,12 +293,9 @@ window.addEventListener('load', () => {
 //Restore saved shopping list on page load
 window.addEventListener('load', () => {
 
-    //Delete shopping list from the UI
-    listView.clearShoppingList();
-   
-    const storage = JSON.parse(localStorage.getItem('items'));
+    const items = JSON.parse(localStorage.getItem('items'));
         
-    if (storage) {
+    if (items) {
         
         state.list = new List();
 
@@ -309,15 +308,14 @@ window.addEventListener('load', () => {
         //Add a delete shopping list button to UI
         listView.deleteButton();
 
-              
     }
-
        
 });
 
 
 //Handle delete and update list item events
 elements.shopping.addEventListener('click', event => {
+
     let id = event.target.closest('.shopping__item').dataset.itemid;
     
     //Handle the delete button
@@ -330,17 +328,18 @@ elements.shopping.addEventListener('click', event => {
         if (state.list.items.length === 0) {
             //Delete shopping list from the UI
             listView.clearShoppingList();
+
             //Delete shopping list items from the localStorage
             localStorage.clear();
 
-             //Disable add to shopping list button after clicking on it
-            //  document.querySelector('.recipe__btn--add').classList.remove('btn-disable');
-             
-            controlRecipe();
+            location.reload();
 
+            // controlRecipe();
            
         }
-      
+
+        
+        
         //Handle the count update
     } else if (event.target.matches('.shopping__count-value')) {
         const val = parseFloat(event.target.value, 10);
@@ -351,28 +350,34 @@ elements.shopping.addEventListener('click', event => {
 //Handle delete shopping list event
 elements.deleteAll.addEventListener('click', event => {
     if (event.target.matches('.delete-btn, .delete-btn *')) {
+      
+        const items = JSON.parse(localStorage.getItem('items'));
         
-        const storage = JSON.parse(localStorage.getItem('items'));
-        
-        if (storage) {
+        if (items) {
+
+            //Delete shopping list from the UI
+            // listView.clearShoppingList();
 
             //Delete shopping list items from the localStorage
             localStorage.clear();
 
+             //Delete shopping list items from the state
+            // state.list.deleteAllItems();
+
         }
 
-        //Delete shopping list from the UI
-        listView.clearShoppingList();
+         //Delete shopping list from the UI
+         listView.clearShoppingList();
 
-        //Delete shopping list items from the state
-        state.list.deleteAllItems();
+           //Delete shopping list items from the state
+           state.list.deleteAllItems();
 
-        //Disable add to shopping list button after clicking on it
-        // document.querySelector('.recipe__btn--add').classList.remove('btn-disable');
-           
-        //Update ingredient icons on the UI
-        controlRecipe();
-        
+           location.reload();
+
+         //Refresh recipe on the UI
+        //  controlRecipe();
+
+              
         // console.log(state.list.items);
     }
      
@@ -393,11 +398,19 @@ elements.recipe.addEventListener('click', event => {
 
         //Add all of the ingredients to shopping list
     } else if (event.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
+
+        // recipeView.toggleButton('.recipe__btn--add');
+
         
-        //Disable add to shopping list button after clicking on it
-        // document.querySelector('.recipe__btn--add').classList.add('btn-disable');
 
         controlList();
+
+        recipeView.toggleButton();
+
+        // recipeView.toggleButton('.recipe__btn--add');
+
+        //Disable add to shopping list button after clicking on it
+        // document.querySelector('.recipe__btn--add').classList.add('btn-disable');
 
         //Add selected ingredient to shopping list
     }else if (event.target.matches('.btn-add-shopping, .btn-add-shopping *')){

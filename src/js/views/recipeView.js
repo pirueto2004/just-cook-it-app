@@ -60,24 +60,16 @@ export const toggleElem = (elemId) => {
     
 };
 
-//Change ingredient icon-circle-with-plus to icon-check when clicked and added to shopping list
-// export const updateIngredientIcon = (id) => {
-//   const item =  document.querySelector(`[data-tag="${id}"] use`);
-//   console.log(item);
-//   if (item.getAttribute('href') === 'img/icons.svg#icon-circle-with-plus') {
-//     item.setAttribute('href', 'img/icons.svg#icon-check');
-   
-//     //Disable icon button when clicked
-//      toggleElem(`btn${id}`);
-//   } else {
-//     item.setAttribute('href', 'img/icons.svg#icon-circle-with-plus');
-   
-//     //Enable icon button when clicked
-//      toggleElem(`btn${id}`);
-//   }
-  
-  
-// };
+export const toggleButton = () => {
+    const el = document.querySelector('.recipe__btn--add');
+    
+    if (el.classList.contains('btn-disable')) {
+        el.classList.remove('btn-disable');
+    }
+      
+    el.classList.toggle('btn-disable');
+};
+
 
 export const renderRecipe = (recipe, isLiked) => {
     const markup = `
@@ -131,7 +123,7 @@ export const renderRecipe = (recipe, isLiked) => {
                 ${recipe.ingredients.map((elem, index) => createIngredient(elem, index, false)).join('')}
             </ul>
 
-            <button class="btn-small recipe__btn recipe__btn--add">
+            <button class="btn-small recipe__btn recipe__btn--add ">
                 <svg class="search__icon">
                     <use href="img/icons.svg#icon-shopping-cart"></use>
                 </svg>
@@ -154,6 +146,8 @@ export const renderRecipe = (recipe, isLiked) => {
             </a>
         </div>
     `;
+
+    
 
     elements.recipe.insertAdjacentHTML('afterbegin', markup);
 

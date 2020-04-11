@@ -15,8 +15,11 @@ export default class List {
             unit,
             ingredient
         }
+        //Add item to the list array
         this.items.push(item);
+        //Save array to the localStorage
         this.persistListItem();
+        //Return current item 
         return item;
     }
 
@@ -42,16 +45,18 @@ export default class List {
     }
 
     persistListItem () {
+        //Saving items in localStorage
         localStorage.setItem('items', JSON.stringify(this.items));    
     }
 
     readStorage () {
-        const storedItems = localStorage.getItem('items');
+        //Retrieving items from localStorage
+        const items = localStorage.getItem('items');
 
         //Restoring items from the localStorage
-        this.items = storedItems ? JSON.parse(storedItems) : [];
+        // this.items = items ? JSON.parse(items) : [];
 
-        // if (storage) this.items = storage;
+        if (items) this.items = JSON.parse(items);
     }
     
 };

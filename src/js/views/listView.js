@@ -52,8 +52,6 @@ export const deleteItem = id => {
 export const clearShoppingList = () => {
     elements.shopping.innerHTML = ''; 
     elements.deleteAll.innerHTML = '';
-    //Disable add to shopping list button after clicking on it
-    // document.querySelector('.recipe__btn--add').classList.remove('btn-disable');
 };
 
 
