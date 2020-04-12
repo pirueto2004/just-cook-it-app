@@ -50,6 +50,7 @@ const controlSearch = async () => {
         //3. Prepare UI for results
         searchView.clearInput();
         searchView.clearResults();
+        
         renderLoader(elements.searchRes);
         try {
             //4. Search for recipes
@@ -70,6 +71,8 @@ const controlSearch = async () => {
 //Check for the event 'submit' of the search form
 elements.searchForm.addEventListener('submit', event => {
     event.preventDefault();
+    //Clear localStorage
+    localStorage.clear();
     controlSearch();
 });
 
@@ -332,9 +335,10 @@ elements.shopping.addEventListener('click', event => {
             //Delete shopping list items from the localStorage
             localStorage.clear();
 
-            location.reload();
+            // Reload the current page from the browser's cache
+            window.location.reload();
 
-            // controlRecipe();
+            controlRecipe();
            
         }
 
@@ -372,12 +376,13 @@ elements.deleteAll.addEventListener('click', event => {
            //Delete shopping list items from the state
            state.list.deleteAllItems();
 
-           location.reload();
+           controlRecipe();
 
-         //Refresh recipe on the UI
-        //  controlRecipe();
+           // Reload the current page from the browser's cache
+           window.location.reload();
 
-              
+           
+          
         // console.log(state.list.items);
     }
      
@@ -399,20 +404,13 @@ elements.recipe.addEventListener('click', event => {
         //Add all of the ingredients to shopping list
     } else if (event.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
 
-        // recipeView.toggleButton('.recipe__btn--add');
-
-        
-
+        //Create and display the shopping list on the UI
         controlList();
 
+        //Toggles the add to shopping list button on the recipe
         recipeView.toggleButton();
 
-        // recipeView.toggleButton('.recipe__btn--add');
-
-        //Disable add to shopping list button after clicking on it
-        // document.querySelector('.recipe__btn--add').classList.add('btn-disable');
-
-        //Add selected ingredient to shopping list
+    //Add selected ingredient to shopping list
     }else if (event.target.matches('.btn-add-shopping, .btn-add-shopping *')){
         
         //Get the id of the <li> closest to the clicked element
